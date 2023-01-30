@@ -1,5 +1,5 @@
 # Pardus Android [![Build Status](https://travis-ci.com/wbayer/pardus-android.svg?branch=master)](https://travis-ci.com/wbayer/pardus-android) #
-Pardus for Android, available on [Google Play](https://play.google.com/store/apps/details?id=at.pardus.android.browser), is a convenient web client for the [massive multiplayer online game Pardus](https://www.pardus.at/). Besides the standard browser component its features are:
+Pardus for Android, is a convenient web client for the [massive multiplayer online game Pardus](https://www.pardus.at/). Besides the standard browser component its features are:
 
 ## Local images ##
 An image pack is downloaded at the application's first start. Subsequently images are loaded only from the local image pack, saving expensive mobile network traffic and improving performance.
