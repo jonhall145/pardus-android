@@ -1,14 +1,16 @@
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application'
+}
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion '28.0.3'
+    namespace 'at.pardus.android.browser'
+    compileSdk 34
     defaultConfig {
         applicationId "at.pardus.android.browser"
-        minSdkVersion 26
-        targetSdkVersion 28
-        versionCode 26162
-        versionName '1.6.2'
+        minSdk 26
+        targetSdk 34
+        versionCode 26163
+        versionName '1.6.3'
     }
     buildTypes {
         release {
@@ -18,15 +20,16 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
-    productFlavors {
+    lint {
+        lintConfig = file('lint.xml')
     }
 }
 
 dependencies {
     implementation 'at.pardus.android:webview-gm-lib:1.2.0'
     implementation 'at.pardus.android:webview-gm-ui:1.2.0'
-    implementation 'org.nanohttpd:nanohttpd-webserver:2.3.2-SNAPSHOT'
+    implementation 'org.nanohttpd:nanohttpd-webserver:2.3.1'
 }

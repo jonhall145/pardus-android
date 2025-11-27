@@ -1,9 +1,8 @@
 # Created by .ignore support plugin (hsz.mobi)
 
-# Gradle wrapper
-/gradle/
-gradlew
-gradlew.bat
+# Gradle wrapper JAR file is typically committed but not the distribution
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
 
 ### Android template
 # Built application files

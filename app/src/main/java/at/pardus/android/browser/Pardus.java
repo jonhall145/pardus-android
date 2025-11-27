@@ -23,6 +23,7 @@ import android.app.Dialog;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -33,6 +34,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.WindowMetrics;
 import android.webkit.WebView;
 import android.widget.GridView;
 import android.widget.ProgressBar;
@@ -622,15 +624,21 @@ public class Pardus extends ScriptManagerActivity {
 	/**
 	 * Updates static variables regarding display configuration.
 	 */
+	@SuppressWarnings("deprecation")
 	private void parseDisplayMetrics() {
-		DisplayMetrics displayMetrics = new DisplayMetrics();
-		getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-		displayWidthPx = displayMetrics.widthPixels;
-		displayHeightPx = displayMetrics.heightPixels;
-		displayWidthDp = (int) Math.ceil(displayMetrics.widthPixels
-				/ displayMetrics.density);
-		displayHeightDp = (int) Math.ceil(displayMetrics.heightPixels
-				/ displayMetrics.density);
+		DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+			WindowMetrics windowMetrics = getWindowManager().getCurrentWindowMetrics();
+			Rect bounds = windowMetrics.getBounds();
+			displayWidthPx = bounds.width();
+			displayHeightPx = bounds.height();
+		} else {
+			getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+			displayWidthPx = displayMetrics.widthPixels;
+			displayHeightPx = displayMetrics.heightPixels;
+		}
+		displayWidthDp = (int) Math.ceil(displayWidthPx / displayMetrics.density);
+		displayHeightDp = (int) Math.ceil(displayHeightPx / displayMetrics.density);
 		displayDensityScale = displayMetrics.density;
 		displayDpi = displayMetrics.densityDpi;
 		orientation = (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE || displayWidthPx > displayHeightPx) ? Configuration.ORIENTATION_LANDSCAPE

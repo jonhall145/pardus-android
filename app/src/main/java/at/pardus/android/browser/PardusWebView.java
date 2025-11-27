@@ -31,7 +31,6 @@ import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.WebBackForwardList;
 import android.webkit.WebSettings;
-import android.webkit.WebViewDatabase;
 import android.widget.ProgressBar;
 
 import java.util.Date;
@@ -64,8 +63,6 @@ public class PardusWebView extends WebViewGm {
 	private PardusPageProperties pageProperties;
 
 	private PardusLinks links;
-
-	private WebViewDatabase database;
 
 	private CookieManager cookieManager;
 
@@ -138,7 +135,6 @@ public class PardusWebView extends WebViewGm {
 			// attempt to not display the automatic "double-tap tip"
 			prefs.edit().putInt("double_tap_toast_count", 0).apply();
 		}
-		database = WebViewDatabase.getInstance(getContext());
 		cookieManager = CookieManager.getInstance();
 		cookieManager.setAcceptCookie(true);
 		setRememberPageProperties(PardusPreferences.isRememberPageProperties());
@@ -524,12 +520,6 @@ public class PardusWebView extends WebViewGm {
     public void removeTraces() {
 		if (BuildConfig.DEBUG) {
 			Log.v(this.getClass().getSimpleName(), "Clearing cache");
-		}
-		if (database != null) {
-            //noinspection deprecation
-            database.clearUsernamePassword();
-            //noinspection deprecation
-			database.clearFormData();
 		}
         PardusPreferences.setStoreCredentials(PardusPreferences.StoreCredentials.NO);
 		clearFormData();
